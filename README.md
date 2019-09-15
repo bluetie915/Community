@@ -14,6 +14,8 @@
 
 [Spring](https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#boot-features-embedded-database-support)
 
+[菜鸟教程](https://www.runoob.com/mysql/mysql-select-query.html)
+
 ## 工具
 [Git](https://git-scm.com/)
 
