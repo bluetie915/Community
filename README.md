@@ -19,3 +19,15 @@
 
 [Visual Paradigm](https://www.visual-paradigm.com)
 
+## 脚本
+```sql
+    create table USER
+    (
+      ID INT AUTHORIZATION PRIMARY KEY NOT NULL,
+      ACCOUNT_ID   VARCHAR(100),
+      NAME         VARCHAR(50),
+      TOKEN        CHAR(36),
+      GMT_CREATE   BIGINT,
+      GMT_MODIFIED BIGINT
+    );
+```
