@@ -21,6 +21,7 @@
 
 [Visual Paradigm](https://www.visual-paradigm.com)
 
+[Flyway](https://flywaydb.org/getstarted/firststeps/maven)
 ## 脚本
 ```sql
     create table USER
@@ -32,4 +33,8 @@
       GMT_CREATE   BIGINT,
       GMT_MODIFIED BIGINT
     );
+```
+
+```bash
+    mvn flyway:migrate
 ```
