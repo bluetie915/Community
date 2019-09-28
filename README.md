@@ -22,6 +22,8 @@
 [Visual Paradigm](https://www.visual-paradigm.com)
 
 [Flyway](https://flywaydb.org/getstarted/firststeps/maven)
+
+[Lombok](https://projectlombok.org)
 ## 脚本
 ```sql
     create table USER

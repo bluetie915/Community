@@ -1,0 +1,1 @@
+ALTER TABLE user ADD vatar_url varchar(100) NULL;
