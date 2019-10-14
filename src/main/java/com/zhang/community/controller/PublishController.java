@@ -28,7 +28,7 @@ public class PublishController {
         return "publish";
     }
 
-    @PostMapping("/publishpost")
+    @PostMapping("/publish")
     public String doPublish(
             @RequestParam(value = "title",required = false) String title,
             @RequestParam(value = "description",required = false) String description,
@@ -77,7 +77,7 @@ public class PublishController {
         question.setTag(tag);
         question.setGmtCreate(System.currentTimeMillis());
         question.setGmtModified(question.getGmtCreate());
-        question.setCreator(question.getCreator());
+        question.setCreator(user.getId());
         questionMapper.create(question);
         return "redirect:/";
     }
