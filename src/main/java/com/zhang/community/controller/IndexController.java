@@ -40,8 +40,10 @@ public class IndexController {
                 }
             }
         }
-
         List<QuestionDTO> lists = questionService.list();
+        for (QuestionDTO list : lists) {
+            list.setDescription("est successfully");
+        }
         model.addAttribute("questions",lists);
         return "index";
     }
