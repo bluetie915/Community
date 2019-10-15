@@ -14,14 +14,20 @@ public class PaginationDTO {
     private boolean showEndPage;
     private Integer page;
     private List<Integer> pages = new ArrayList<Integer>();
+    private Integer totalPage;
 
     public void setPagination(Integer totalCount, Integer page, Integer size) {
-        this.page = page;
-        Integer totalPage;
         if (totalCount % size == 0)
             totalPage = totalCount / size;
-        totalPage = totalCount / size + 1;
+        else
+            totalPage = totalCount / size + 1;
 
+        if (page < 1)
+            page = 1;
+        if (page > totalPage)
+            page = totalPage;
+
+        this.page = page;
         pages.add(page);
         for (int i = 1; i <= 3; i ++) {
             if (page - i > 0)
@@ -30,23 +36,26 @@ public class PaginationDTO {
                 pages.add(page + i);
         }
 
-
         //是否显示上一页
         if (page == 1)
             showPrevious = false;
-        showPrevious = true;
+        else
+            showPrevious = true;
         //是否显示下一页
         if (page == totalPage)
             showNext = false;
-        showNext = true;
+        else
+            showNext = true;
 
         //是否显示第一页
         if (pages.contains(1))
             showFirstPage = false;
-        showFirstPage = true;
+        else
+            showFirstPage = true;
         //是否显示最后一页
         if (pages.contains(totalPage))
             showEndPage = false;
-        showEndPage = true;
+        else
+            showEndPage = true;
     }
 }
