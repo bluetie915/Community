@@ -4,6 +4,7 @@ import com.zhang.community.dto.PaginationDTO;
 import com.zhang.community.dto.QuestionDTO;
 import com.zhang.community.exception.CustomizeErrorCode;
 import com.zhang.community.exception.CustomizeException;
+import com.zhang.community.mapper.QuestionExtMapper;
 import com.zhang.community.mapper.QuestionMapper;
 import com.zhang.community.mapper.UserMapper;
 import com.zhang.community.model.Question;
@@ -22,6 +23,9 @@ public class QuestionService {
 
     @Autowired
     private QuestionMapper questionMapper;
+
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
     @Autowired
     private UserMapper userMapper;
@@ -128,11 +132,9 @@ public class QuestionService {
     }
 
     public void incView(Integer id) {
-        Question question = questionMapper.selectByPrimaryKey(id);
-        Question updateQuestion = new Question();
-        updateQuestion.setViewCount(question.getViewCount()+1);
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.createCriteria().andIdEqualTo(question.getId());
-        questionMapper.updateByExampleSelective(updateQuestion, questionExample);
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
     }
 }
