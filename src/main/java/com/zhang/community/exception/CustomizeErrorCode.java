@@ -10,9 +10,10 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     }
 
     private String message;
+    private Integer code;
 
-    CustomizeErrorCode(String message) {
+    CustomizeErrorCode(Integer code, String message) {
+        this.code = code;
         this.message = message;
     }
-
 }

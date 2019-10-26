@@ -5,6 +5,7 @@ import com.zhang.community.dto.ResultDTO;
 import com.zhang.community.mapper.CommentMapper;
 import com.zhang.community.model.Comment;
 import com.zhang.community.model.User;
+import com.zhang.community.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,9 @@ public class CommentController {
 
     @Autowired
     private CommentMapper commentMapper;
+
+    @Autowired
+    private CommentService commentService;
 
     @ResponseBody
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
@@ -39,7 +43,7 @@ public class CommentController {
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setCommentator(1);
         comment.setLikeCount(0L);
-        commentMapper.insert(comment);
+        commentService.insert(comment);
         Map<Object, Object> objectObjectHashMap = new HashMap<>();
         objectObjectHashMap.put("message", "成功");
         return objectObjectHashMap;
