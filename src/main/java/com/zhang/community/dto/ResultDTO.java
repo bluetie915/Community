@@ -1,5 +1,7 @@
 package com.zhang.community.dto;
 
+import com.zhang.community.exception.CustomizeErrorCode;
+import com.zhang.community.exception.CustomizeException;
 import lombok.Data;
 
 @Data
@@ -12,5 +14,20 @@ public class ResultDTO {
         resultDTO.setCode(code);
         resultDTO.setMessage(message);
         return resultDTO;
+    }
+
+    public static ResultDTO errorOf(CustomizeErrorCode errorCode) {
+        return errorOf(errorCode.getCode(),errorCode.getMessage());
+    }
+
+    public static ResultDTO okOf(){
+        ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setCode(200);
+        resultDTO.setMessage("请求成功");
+        return resultDTO;
+    }
+
+    public static Object errorOf(CustomizeException e) {
+        return errorOf(e.getCode(),e.getMessage());
     }
 }

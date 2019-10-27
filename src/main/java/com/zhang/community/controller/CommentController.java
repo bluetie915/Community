@@ -2,7 +2,7 @@ package com.zhang.community.controller;
 
 import com.zhang.community.dto.CommentDTO;
 import com.zhang.community.dto.ResultDTO;
-import com.zhang.community.mapper.CommentMapper;
+import com.zhang.community.exception.CustomizeErrorCode;
 import com.zhang.community.model.Comment;
 import com.zhang.community.model.User;
 import com.zhang.community.service.CommentService;
@@ -14,14 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class CommentController {
-
-    @Autowired
-    private CommentMapper commentMapper;
 
     @Autowired
     private CommentService commentService;
@@ -32,8 +27,8 @@ public class CommentController {
                        HttpServletRequest request) {
 
         User user = (User) request.getSession().getAttribute("user");
-        if (user == null){
-            return ResultDTO.errorOf(2002,"未登录不能进行评论，请先登录");
+        if (user == null) {
+            return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
         Comment comment = new Comment();
         comment.setParentId(commentDTO.getParentId());
@@ -41,11 +36,9 @@ public class CommentController {
         comment.setType(commentDTO.getType());
         comment.setGmtModified(System.currentTimeMillis());
         comment.setGmtCreate(System.currentTimeMillis());
-        comment.setCommentator(1);
+        comment.setCommentator(user.getId());
         comment.setLikeCount(0L);
         commentService.insert(comment);
-        Map<Object, Object> objectObjectHashMap = new HashMap<>();
-        objectObjectHashMap.put("message", "成功");
-        return objectObjectHashMap;
+        return ResultDTO.okOf();
     }
 }
